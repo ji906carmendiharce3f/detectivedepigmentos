@@ -3,8 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Encuentra el Intruso</title>
+  <title>Detective de Pigmentos - Jardín Nº 906 - Carmen Diharce - 3F</title>
   <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -19,10 +22,9 @@
           Aparecerán 4 pigmentos en cada nivel...<br />
           pero uno es diferente a los demás.<br />
           ¿Podés detectar cuál es el intruso?<br />
-          Hay 10 niveles y la dificultad irá aumentando.<br />
+          Hay 10 niveles y 20 segundos para completarlos<br />
           ¡Tocá EMPEZAR para jugar!
         </h4>
-        <br />
         <button id="btn-comenzar">EMPEZAR</button>
       </div>
     </div>
@@ -30,10 +32,19 @@
 
   <!-- Juego principal -->
   <div id="juego" style="display: none;">
-    <div id="level-info">Nivel: 1 - Tiempo restante: 10s</div>
-    <div id="grid"></div>
-    <div id="message"></div>
-    <button id="restart">Reiniciar</button>
+    <div id="juego-contenido">
+      <div id="level-info">Nivel: 1 - Tiempo restante: 20s</div>
+      <br />
+      <div id="grid"></div>
+      <div id="message"></div>
+      <button id="restart">Reiniciar</button>
+    </div>
+  </div>
+
+  <!-- Mensaje final (pantalla completa) -->
+  <div id="fullscreen-message" class="fullscreen-message" style="display: none;">
+    <div id="final-text"></div>
+    <button id="final-restart">REINCIAR</button>
   </div>
 
   <script src="script.js"></script>

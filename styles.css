@@ -1,16 +1,28 @@
-/* General */
-body {
-  font-family: sans-serif;
-  background-color: #000000;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 100vh;
+
+.dynapuff-550 {
+  font-family: "DynaPuff", system-ui;
+  font-optical-sizing: auto;
+  font-weight: 550;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
 }
 
-/* Pantalla inicio */
+/* General */
+body {
+  font-family: "DynaPuff";
+  margin: 0;
+  padding: 0;
+  background-color: #000000;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Pantalla de inicio */
 #pantalla-inicio {
   display: flex;
   flex-direction: column;
@@ -45,6 +57,7 @@ body {
   color: white;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  font-family: "DynaPuff";
 }
 
 #pantalla-inicio button:hover {
@@ -53,33 +66,46 @@ body {
 
 /* Juego principal */
 #juego {
+  display: none;
   width: 100vw;
-  max-width: 400px;
+  height: 100vh;
+  background-color: #000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 20px;
   box-sizing: border-box;
-  text-align: center;
 }
 
+#juego-contenido {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Nivel */
 #level-info {
   font-weight: bold;
   margin-bottom: 10px;
-  font-size: 1.2rem;
+  font-size: 1.6rem;
   color: white;
+  text-align: center;
 }
 
+/* Cuadrícula */
 #grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
   gap: 10px;
-  margin: 0 auto 10px auto;
   width: 100%;
-  max-width: 400px;
+  max-width: 300px;
+  margin-bottom: 10px;
 }
 
 .square {
   width: 100%;
-  aspect-ratio: 1 / 1; 
+  aspect-ratio: 1 / 1;
   cursor: pointer;
   border-radius: 8px;
   box-shadow: 0 0 3px #999;
@@ -90,28 +116,28 @@ body {
   transform: scale(0.95);
 }
 
+/* Mensaje */
 #message {
-  color: green;
+  color: rgb(240, 156, 1);
   font-size: 1.1rem;
   margin: 10px 0;
   text-align: center;
   min-height: 1.3em;
 }
 
-
+/* Botón de reinicio */
 #restart {
-  margin-top: 10px;
   padding: 10px 20px;
   font-size: 1.1rem;
   border: none;
   border-radius: 6px;
   background-color: #4285f4;
-  color: rgb(0, 0, 0);
+  color: black;
   cursor: pointer;
   display: none;
 }
 
-
+/* Pantalla de mensaje final */
 .fullscreen-message {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -120,7 +146,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   color: #00a2ff;
   text-align: center;
   padding: 20px;
@@ -141,6 +167,7 @@ body {
   background-color: #4285f4;
   color: white;
   transition: background-color 0.3s ease;
+  font-family: "DynaPuff";
 }
 
 #final-restart:hover {

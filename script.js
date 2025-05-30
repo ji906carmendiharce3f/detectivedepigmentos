@@ -5,6 +5,9 @@ const levelInfo = document.getElementById('level-info');
 const message = document.getElementById('message');
 const restartButton = document.getElementById('restart');
 const juego = document.getElementById('juego');
+const fullscreenMsg = document.getElementById('fullscreen-message');
+const finalText = document.getElementById('final-text');
+const finalRestartBtn = document.getElementById('final-restart');
 
 const baseColors = ["#964B00", "#FFA500", "#228B22"]; // Marrón, naranja, verde
 const intruderColors = [
@@ -14,36 +17,45 @@ const intruderColors = [
 
 let level = 1;
 const maxLevel = 10;
+const winThreshold = 5;
 
-let totalTime = 10; 
+const totalTime = 20; 
 let timeLeft = totalTime;
 let timerInterval;
 
 startButton.addEventListener('click', () => {
   startScreen.style.display = 'none';
-  juego.style.display = 'block';
-  restartButton.style.display = 'none'; 
+  juego.style.display = 'flex';
+  restartButton.style.display = 'none';
+  fullscreenMsg.style.display = 'none';
   startGame();
 });
 
 restartButton.addEventListener('click', () => {
-  
-  const fullscreenMsg = document.getElementById('fullscreen-message');
-  if (fullscreenMsg) {
-    fullscreenMsg.style.display = 'none';
-  }
+  fullscreenMsg.style.display = 'none';
   levelInfo.style.display = 'block';
-  restartButton.style.display = 'none'; 
   message.style.display = 'block';
   message.textContent = '';
   timeLeft = totalTime;
   startGame();
 });
 
+finalRestartBtn.addEventListener('click', () => {
+  fullscreenMsg.style.display = 'none';    
+  startScreen.style.display = 'flex';       
+  juego.style.display = 'none';             
+  levelInfo.style.display = 'block';       
+  message.style.display = 'block';         
+  restartButton.style.display = 'none';     
+  message.textContent = '';                 
+  timeLeft = totalTime;                
+  level = 1;                                
+});
+
+
 function startGame() {
   level = 1;
   message.textContent = '';
-  timeLeft = totalTime;
   generateLevel();
   startTimer();
 }
@@ -53,16 +65,13 @@ function generateLevel() {
   message.textContent = '';
   grid.innerHTML = '';
 
-  const size = 2;  // 2x2 fijo
+  const size = 2; // 2x2 cuadrícula
   const totalSquares = size * size;
   const baseColor = baseColors[Math.floor(Math.random() * baseColors.length)];
 
-  let intruderColor;
-  if (level <= intruderColors.length) {
-    intruderColor = intruderColors[level - 1];
-  } else {
-    intruderColor = generateSimilarColor(baseColor, 5);
-  }
+  let intruderColor = level <= intruderColors.length
+    ? intruderColors[level - 1]
+    : generateSimilarColor(baseColor, 5);
 
   const intruderIndex = Math.floor(Math.random() * totalSquares);
 
@@ -78,13 +87,13 @@ function generateLevel() {
 function handleClick(isCorrect) {
   if (isCorrect) {
     if (level === maxLevel) {
-      endGame(true);
+      endGame(level >= winThreshold);
     } else {
       level++;
-      generateLevel();
+      generateLevel();  
     }
   } else {
-    message.textContent = '¡Fallaste! Intenta de nuevo.';
+    message.textContent = 'Mmm.. Intentá de nuevo.';
   }
 }
 
@@ -93,9 +102,8 @@ function startTimer() {
   timerInterval = setInterval(() => {
     timeLeft -= 0.1;
     if (timeLeft <= 0) {
-      timeLeft = 0;
       clearInterval(timerInterval);
-      endGame(false);
+      endGame(level >= winThreshold);
     } else {
       updateLevelInfo();
     }
@@ -111,44 +119,18 @@ function endGame(won) {
   grid.innerHTML = '';
   levelInfo.style.display = 'none';
   message.style.display = 'none';
-  restartButton.style.display = 'none'; 
+  restartButton.style.display = 'none';
+  juego.style.display = 'none';
 
-
-  let fullscreenMsg = document.getElementById('fullscreen-message');
-  if (!fullscreenMsg) {
-    fullscreenMsg = document.createElement('div');
-    fullscreenMsg.id = 'fullscreen-message';
-    fullscreenMsg.className = 'fullscreen-message';
-
-    
-    const textDiv = document.createElement('div');
-    textDiv.id = 'final-text';
-    fullscreenMsg.appendChild(textDiv);
-
-
-    const finalRestartBtn = document.createElement('button');
-    finalRestartBtn.id = 'final-restart';
-    finalRestartBtn.textContent = 'Reiniciar';
-    finalRestartBtn.addEventListener('click', () => {
-      fullscreenMsg.style.display = 'none';
-      startScreen.style.display = 'flex'; 
-      juego.style.display = 'none';
-    });
-    fullscreenMsg.appendChild(finalRestartBtn);
-
-    document.body.appendChild(fullscreenMsg);
+  if (won) {
+    finalText.textContent = `¡Felicitaciones! Completaste ${level} niveles y ganaste el juego.`;
+  } else {
+    finalText.textContent = `Se terminó el tiempo. Completaste ${level - 1} de 10 niveles. Intentá de nuevo.`;
   }
 
- 
-  document.getElementById('final-text').textContent = won
-    ? '¡Ganaste! Has completado todos los niveles.'
-    : '¡Se acabó el tiempo! Intenta de nuevo.';
-
-  fullscreenMsg.style.display = 'flex';
-
-  
-  juego.style.display = 'none';
+  fullscreenMsg.style.display = 'flex'; 
 }
+
 
 function generateSimilarColor(baseHex, difficulty) {
   let rgb = hexToRgb(baseHex);
