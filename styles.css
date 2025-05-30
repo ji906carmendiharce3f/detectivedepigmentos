@@ -8,7 +8,7 @@
     "wdth" 100;
 }
 
-/* General */
+
 html,body {
   font-family: "DynaPuff";
   margin: 0;
@@ -22,7 +22,7 @@ html,body {
   align-items: center;
 }
 
-/* Pantalla de inicio */
+
 #pantalla-inicio {
   display: flex;
   flex-direction: column;
@@ -64,7 +64,7 @@ html,body {
   background-color: #3367d6;
 }
 
-/* Juego principal */
+
 #juego {
   display: none;
   width: 100vw;
@@ -84,7 +84,7 @@ html,body {
   justify-content: center;
 }
 
-/* Nivel */
+
 #level-info {
   font-weight: bold;
   margin-bottom: 10px;
@@ -93,7 +93,7 @@ html,body {
   text-align: center;
 }
 
-/* Cuadrícula */
+
 #grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -116,7 +116,7 @@ html,body {
   transform: scale(0.95);
 }
 
-/* Mensaje */
+
 #message {
   color: rgb(240, 156, 1);
   font-size: 1.1rem;
@@ -125,7 +125,7 @@ html,body {
   min-height: 1.3em;
 }
 
-/* Botón de reinicio */
+
 #restart {
   padding: 10px 20px;
   font-size: 1.1rem;
@@ -137,7 +137,7 @@ html,body {
   display: none;
 }
 
-/* Pantalla de mensaje final */
+
 .fullscreen-message {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
