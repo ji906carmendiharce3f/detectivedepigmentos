@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Encuentra el Intruso</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Pantalla de inicio -->
+  <div id="pantalla-inicio" class="pantalla-inicio">
+    <div class="col">
+      <div class="row">
+        <img src="./logodetec.png" alt="Logo" style="max-width: 80vw; height: auto;" />
+      </div>
+      <div class="row">
+        <h4>
+          Aparecerán 4 pigmentos en cada nivel...<br />
+          pero uno es diferente a los demás.<br />
+          ¿Podés detectar cuál es el intruso?<br />
+          Hay 10 niveles y la dificultad irá aumentando.<br />
+          ¡Tocá EMPEZAR para jugar!
+        </h4>
+        <br />
+        <button id="btn-comenzar">EMPEZAR</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Juego principal -->
+  <div id="juego" style="display: none;">
+    <div id="level-info">Nivel: 1 - Tiempo restante: 10s</div>
+    <div id="grid"></div>
+    <div id="message"></div>
+    <button id="restart">Reiniciar</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
